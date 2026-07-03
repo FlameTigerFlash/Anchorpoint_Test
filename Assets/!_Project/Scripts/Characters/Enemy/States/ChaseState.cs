@@ -25,7 +25,6 @@ public class ChaseState : BaseState
         {
             _controller.Navigator.isStopped = false;
             _controller.Navigator.SetDestination(_player.transform.position);
-            _controller.Watch.SetTarget(_player);
         }
     }
 
@@ -37,7 +36,7 @@ public class ChaseState : BaseState
             return;
         }
 
-        bool targetReachable = _controller.Watch.GetTargetRayCollision(out var hitPos, _controller.MeleeAttack.AttackRange);
+        bool targetReachable = _controller.Watch.GetTargetRayCollision(_player, out var hitPos, _controller.MeleeAttack.AttackRange);
         if (targetReachable)
         {
             _controller.OnChangeState(StateName.Attack);

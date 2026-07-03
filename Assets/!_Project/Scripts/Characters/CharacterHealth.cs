@@ -6,6 +6,8 @@ public class CharacterHealth : MonoBehaviour
     [SerializeField] private int _maxHealth = 5;
     [SerializeField] private int _initialHealth = 1;
 
+    [SerializeField] private bool _destroyIfNoHP = true;
+
     public UnityEvent<int> HealthChangedEvent;
     public UnityEvent DeathEvent;
 
@@ -56,6 +58,9 @@ public class CharacterHealth : MonoBehaviour
     public void Die()
     {
         DeathEvent.Invoke();
-        Destroy(gameObject);
+        if (_destroyIfNoHP)
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -24,7 +24,7 @@ public class PlayerLookRotate : MonoBehaviour
         HandleVerticalLook();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         RotateTowardsCursor();
     }
@@ -33,12 +33,13 @@ public class PlayerLookRotate : MonoBehaviour
     {
         HandleHorizontalLook();
         HandleVerticalLook();
+        _lookInput = Vector2.zero;
     }
 
     private void HandleHorizontalLook()
     {
         float horizontal = _lookInput.x * _mouseSensitivity;
-        _rb.rotation *= Quaternion.Euler(0f, horizontal, 0f);
+        transform.rotation *= Quaternion.Euler(0f, horizontal, 0f);
     }
 
     private void HandleVerticalLook()

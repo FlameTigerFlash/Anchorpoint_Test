@@ -70,8 +70,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Event Log
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5e2675d79c612574fbba7fe4674a8228, type: 2}
+  m_sharedMaterial: {fileID: 2872171300332237011, guid: 5e2675d79c612574fbba7fe4674a8228, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -173,6 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LogDisplay
   _text: {fileID: 8502006499227745071}
+  _activeColor: {r: 1, g: 0, b: 0, a: 1}
+  _inactiveColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &8960851872809395299
 MonoBehaviour:
   m_ObjectHideFlags: 0

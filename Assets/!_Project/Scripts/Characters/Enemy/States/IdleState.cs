@@ -4,6 +4,8 @@ public class IdleState : BaseState
 {
     private MapLocator _mapLocator;
 
+    private GameObject _player;
+
     public override void EnterState()
     {
         base.EnterState();
@@ -22,14 +24,13 @@ public class IdleState : BaseState
             _mapLocator = ServiceLocator.GetService<MapLocator>();
             return;
         }
-        GameObject player = _mapLocator.GetPlayer();
-        if (player != null)
+        if (_player == null)
+        {
+            _player = _mapLocator.GetPlayer();
+        }
+        if (_player != null)
         {
             _controller.OnChangeState(StateName.Chase);
-        }
-        else
-        {
-            Debug.LogWarning("Could not find the player.");
         }
     }
 }

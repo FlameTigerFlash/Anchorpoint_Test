@@ -4,15 +4,14 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider))]
 public class PlayerDetector : MonoBehaviour
 {
-    public UnityEvent PlayerEnteredEvent;
-    public UnityEvent PlayerExitedEvent;
+    public UnityEvent<GameObject> PlayerEnteredEvent;
+    public UnityEvent<GameObject> PlayerExitedEvent;
 
     private void OnTriggerEnter(Collider other)
     {
         if (IsPlayer(other.gameObject))
         {
-            Debug.Log("Player has entered the base.");
-            PlayerEnteredEvent.Invoke();
+            PlayerEnteredEvent.Invoke(other.gameObject);
         }
     }
 
@@ -20,8 +19,7 @@ public class PlayerDetector : MonoBehaviour
     {
         if (IsPlayer(other.gameObject))
         {
-            Debug.Log("Player has exited the base.");
-            PlayerExitedEvent.Invoke();
+            PlayerExitedEvent.Invoke(other.gameObject);
         }
     }
 

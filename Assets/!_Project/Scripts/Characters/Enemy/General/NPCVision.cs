@@ -14,19 +14,23 @@ public class NPCVision : MonoBehaviour
 
     private Collider _targetCollider;
 
-    public void SetTarget(GameObject target)
+    public bool GetTargetRayCollision(GameObject target, out Vector3 hitPos, float maxDistance)
     {
         _target = target;
         _target.TryGetComponent<Collider>(out _targetCollider);
-    }
 
-    public bool GetTargetRayCollision(out Vector3 hitPos, float maxDistance)
-    {
         hitPos = _visionPoint.position;
 
         if (_target == null)
         {
+            Debug.Log("Target is null.");
             return false;
+        }
+
+        if (_targetCollider != null && 
+            Physics.ClosestPoint(_visionPoint.position, _targetCollider, _targetCollider.transform.position, _targetCollider.transform.rotation) == _visionPoint.position)
+        {
+            return true;
         }
 
         Vector3 targetPoint = (_targetCollider == null) ? _target.transform.position : _targetCollider.bounds.center;
@@ -39,7 +43,8 @@ public class NPCVision : MonoBehaviour
 
         if (Physics.Raycast(_visionPoint.position, direction, out var hit, maxDistance, _layerMask))
         {
-            if (hit.collider.gameObject != _target)
+            GameObject colliderObject = hit.collider.gameObject;
+            if (colliderObject != _target)
             {
                 return false;
             }

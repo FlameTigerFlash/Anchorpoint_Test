@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class MeleeAttackState : BaseState
 {
@@ -23,7 +24,6 @@ public class MeleeAttackState : BaseState
         else
         {
             _controller.Navigator.SetDestination(_player.transform.position);
-            _controller.Watch.SetTarget(_player);
         }
     }
 
@@ -35,9 +35,10 @@ public class MeleeAttackState : BaseState
             return;
         }
 
-        bool targetReachable = _controller.Watch.GetTargetRayCollision(out var hitPos, _controller.MeleeAttack.AttackRange);
+        bool targetReachable = _controller.Watch.GetTargetRayCollision(_player, out var hitPos, _controller.MeleeAttack.AttackRange);
         if (targetReachable)
         {
+            _controller.Navigator.isStopped = true;
             _controller.MeleeAttack.TryAttack(hitPos);
         }
         else

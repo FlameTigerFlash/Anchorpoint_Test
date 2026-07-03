@@ -6,6 +6,8 @@ public class EventManager : MonoBehaviour
 {
     [SerializeField] private LogsManager _logsManager;
 
+    [SerializeField] private AudioSource _audioSource;
+
     [SerializeField, Range(1f, float.MaxValue)] private float _minInterval = 10f;
     [SerializeField, Range(1f, float.MaxValue)] private float _maxInterval = 20f;
 
@@ -117,6 +119,11 @@ public class EventManager : MonoBehaviour
         _currentEvent.EventFinishedEvent.AddListener(SetFinished);
         _currentEvent.OnInitiate();
         _logsManager.AddLog(_currentEvent.EventDescription);
+
+        if (_audioSource != null)
+        {
+            _audioSource.Play();
+        }
     }
 
     private IEnumerator EventCooldown()

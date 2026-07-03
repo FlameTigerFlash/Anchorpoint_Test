@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 4895095346263105029}
   - component: {fileID: 7119895229680884248}
   - component: {fileID: 7411068774946436800}
+  - component: {fileID: 4074803637858789261}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -221,7 +222,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2989784315589494383}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d8b9cab53cb5d0f469accf05d76af02e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -413,6 +414,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7119895229680884248}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnEscape
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e7f8b86a-b251-4adb-96af-75eaee713929
+    m_ActionName: 'Player/Escape[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -444,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LookRotate
   _camera: {fileID: 2831147220108483885}
-  _mouseSensitivity: 1
+  _mouseSensitivity: 0.3
   _maxVerticalAngle: 80
 --- !u!114 &441214161437205637
 MonoBehaviour:
@@ -477,12 +494,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
   _maxHealth: 5
   _initialHealth: 3
+  _destroyIfNoHP: 0
   HealthChangedEvent:
     m_PersistentCalls:
       m_Calls: []
   DeathEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7119895229680884248}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDie
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2813540783903566437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,7 +545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterEnergy
   _maxEnergy: 100
   _initialEnergy: 20
-  _energyRegeneration: 10
+  _energyRegeneration: 6
   _naturalRegenerationCeiling: 20
 --- !u!114 &7119895229680884248
 MonoBehaviour:
@@ -536,6 +566,7 @@ MonoBehaviour:
   _lookRotate: {fileID: 1425189649416190521}
   _jumpAbility: {fileID: 441214161437205637}
   _shootAbility: {fileID: 2813540783903566437}
+  _deathHandler: {fileID: 4074803637858789261}
 --- !u!114 &7411068774946436800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,6 +582,22 @@ MonoBehaviour:
   InventoryStateChangedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4074803637858789261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2989784315589494383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c897e8c89dc6c354eb74423e852d92f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDeathHandler
+  _rb: {fileID: 3390321871405305422}
+  _knockbackPositionOffset: {x: 0, y: 1, z: 0}
+  _horizontalKnockbackAcceleration: 2
+  _verticalKnockbackAcceleration: 1
 --- !u!1 &7199099662098868588
 GameObject:
   m_ObjectHideFlags: 0

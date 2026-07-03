@@ -21,7 +21,7 @@ public class SphereOneShotDetector : MonoBehaviour
             _center = transform;
         }
 
-        Collider[] colliders = Physics.OverlapSphere(_center.position, _radius, _layerMask);
+        Collider[] colliders = Physics.OverlapSphere(_center.position, _radius, _layerMask, QueryTriggerInteraction.Collide);
 
         if (_seeThroughWalls == false)
         {

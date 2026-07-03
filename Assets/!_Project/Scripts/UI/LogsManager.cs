@@ -11,6 +11,8 @@ public class LogsManager : MonoBehaviour
 
     private Queue<GameObject> _logs = new Queue<GameObject>();
 
+    private GameObject _lastLog;
+
     private void Awake()
     {
         _maxLogsNum = Mathf.Max(0, _maxLogsNum);
@@ -26,10 +28,17 @@ public class LogsManager : MonoBehaviour
 
     public void AddLog(string text)
     {
+        if (_lastLog != null)
+        {
+            _lastLog.GetComponent<LogDisplay>().SetActive(false);
+        }
+
         GameObject log = Instantiate(_logPrefab, _container);
         LogDisplay display = log.GetComponent<LogDisplay>();
+        log.transform.SetAsFirstSibling();
 
         display.Display(text);
+        display.SetActive(true);
 
         while (_logs.Count >= _maxLogsNum)
         {
@@ -38,5 +47,6 @@ public class LogsManager : MonoBehaviour
         }
 
         _logs.Enqueue(log);
+        _lastLog = log;
     }
 }
